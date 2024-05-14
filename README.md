@@ -1,4 +1,5 @@
 # Pic2Hex
+![Pic2Hex Icon](Pic2Hex.png)
 
 Main goal of this small project is to make possible attacking vectors for bitcoin walltes.
 (Maybe someone has his private key stored in an image ;) )
