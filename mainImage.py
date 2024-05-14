@@ -38,16 +38,18 @@ for image_path in image_paths:
     with open(textFileName, 'w') as f:
 
         # load raw data and create hex for each 256 bit a hex (forwards and backwards)
-        data = imageHelper.getRawImageData(image_path)
+        try:
+            data = imageHelper.getRawImageData(image_path)
+        except IOError:
+            print("Error: File does not exist or cannot be read.")
+            return
         
         for offset in range(len(data) - byteOffset):
             hexi1 = data[offset:offset + byteOffset]
             hexStr1 = int8inBinary(hexi1)
-            f.write(hexStr1)
-            f.write('\n')
+            f.write(hexStr1 + '\n')
             hexi2 = hexStr1[::-1]
-            f.write(hexi2)
-            f.write('\n')
+            f.write(hexi2 + '\n')
             
         
         # scaling down to 16x16 and create hex
@@ -56,7 +58,5 @@ for image_path in image_paths:
 
         hex1 = hexRepresentationFromNumpyArray(numpy_array)
         hex2 = hexRepresentationFromNumpyArray(numpy_array_inverted)
-        f.write(hex1)
-        f.write('\n')
-        f.write(hex2)
-        f.write('\n')
+        f.write(hex1 + '\n')
+        f.write(hex2 + '\n')
